@@ -1,0 +1,128 @@
+<div class="container-xl">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-6">
+            <h4><b>New Subject</b></h4>
+          </div>
+          <div class="col-sm-6">
+            <a href="#" routerLink="/Home" class="btn btn-success back"><i class='fas fa-arrow-circle-left'></i>
+              &nbsp;Back</a>
+          </div>
+        </div>
+      </div>
+      <form #employeeForm="ngForm">
+        <div class="table-content">
+          <div class="form-group p-10 row">
+            <div class="col-sm-3">
+              <label for="FirstName" class="p-t-b-10">Tên môn học<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="FirstName" required maxlength="255"
+                [(ngModel)]="addEmployeeForm.name" name="FirstName" #FirstName="ngModel">
+              <div *ngIf="FirstName.errors && isSubmitted" class="alert alert-danger validationError">
+                <div [hidden]="!FirstName.errors?.['required']">
+                  First Name is required
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group p-10 row">
+            <div class="col-sm-3">
+              <label for="LastName" class="p-t-b-10">Mã môn học<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="LastName" required maxlength="255"
+                [(ngModel)]="addEmployeeForm.code" name="LastName" #LastName="ngModel">
+            </div>
+          </div>
+          <div class="form-group p-10 row">
+            <div class="col-sm-3">
+              <label class="p-t-b-10">Số tín chỉ<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-sm-9">
+              <input type="number" class="form-control" id="Email" required maxlength="255"
+                [(ngModel)]="addEmployeeForm.credits" name="Email" #Email="ngModel">
+
+            </div>
+          </div>
+          <div class="form-group p-10 row">
+            <div class="col-sm-3">
+              <label class="p-t-b-10">Khoa<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-sm-9">
+              <textarea class="form-control" id="Address" required [(ngModel)]="addEmployeeForm.department"
+                name="Address" #Address="ngModel">></textarea>
+              <div *ngIf="Address.errors && isSubmitted" class="alert alert-danger validationError">
+                <div [hidden]="!Address.errors?.['required']">
+                  Address is required
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group p-10 row">
+            <div class="col-sm-3">
+              <label class="p-t-b-10">Thông tin môn học<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-sm-9">
+              <input type="text" class="form-control" id="Phone" required maxlength="10"
+                [(ngModel)]="addEmployeeForm.description" name="Phone" #Phone="ngModel">
+     
+            </div>
+          </div>
+          <div class="form-group p-10 row">
+            <div class="col-sm-3">
+              <label class="p-t-b-10">Ngày bắt đầu đăng kí<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-sm-9">
+              <input type="date" class="form-control" id="registrationStart"
+                [(ngModel)]="addEmployeeForm.registrationStart" name="registrationStart">
+            </div>
+          </div>
+          <div class="form-group p-10 row">
+            <div class="col-sm-3">
+              <label class="p-t-b-10">Ngày kết thúc đăng kí<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-sm-9">
+              <input type="date" class="form-control" id="registrationEnd"
+                [(ngModel)]="addEmployeeForm.registrationEnd" name="registrationEnd">
+            </div>
+          </div>
+          <div class="form-group p-10 row">
+            <div class="col-sm-3">
+              <label class="p-t-b-10">Thời gian bắt đầu môn học<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-sm-9">
+              <input type="datetime-local" class="form-control" id="startDate"
+                [(ngModel)]="addEmployeeForm.startDate" name="startDate" step="3600" >
+            </div>
+          </div>
+          <div class="form-group p-10 row">
+            <div class="col-sm-3">
+              <label class="p-t-b-10">Thời gian kết thúc môn học<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-sm-9">
+              <input type="datetime-local" class="form-control" id="endDate"
+                [(ngModel)]="addEmployeeForm.endDate" name="endDate" step="3600">
+            </div>
+
+          </div>
+          <div class="form-group p-10 row">
+            <div class="col-sm-3">
+              <label class="p-t-b-10">số lương sinh viên tối đa<span class="requiredStar">*</span></label>
+            </div>
+            <div class="col-sm-9">
+              <input type="number" class="form-control" id="studentNumerMax"
+                [(ngModel)]="addEmployeeForm.studentNumberMax" name="studentNumerMax">
+            </div>
+
+          </div>
+        </div>
+        <div class="table-footer">
+          <button class="btn btn-success" (click)="addSubject(employeeForm.form.valid)">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

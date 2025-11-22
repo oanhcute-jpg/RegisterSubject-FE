@@ -1,0 +1,111 @@
+<div class="container-xl">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row">
+          <div class="col-sm-6">
+            <h4><b>Thông tin chi tiết môn học</b></h4>
+          </div>
+          <div class="col-sm-6">
+            <a href="#" routerLink="/Home" class="btn btn-success back"><i class='fas fa-arrow-circle-left'></i> &nbsp;Back</a>
+          </div>
+        </div>
+      </div>       
+      <table class="table table-striped table-hover table-bordered table-content">
+        <tbody>
+          <tr>
+            <td>
+              <label><b>Tên Môn học</b></label>
+            </td>
+            <td>
+              <span>{{ employeeDetail.name }}</span>              
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label><b>Mã môn học</b></label>
+            </td>
+            <td>
+              <span>{{ employeeDetail.code }}</span>              
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label><b>Số tín chỉ</b></label>
+            </td>
+            <td>
+              <span>{{ employeeDetail.credits }}</span>              
+            </td>
+          </tr>
+                <tr>
+            <td>
+              <label><b>Tên Khoa</b></label>
+            </td>
+            <td>
+              <span>{{ employeeDetail.department }}</span>              
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label><b>Thông tin môn học</b></label>
+            </td>
+            <td>
+              <span>{{ employeeDetail.description }}</span>              
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <label><b>Ngày bắt đầu mở đăng kí</b></label>
+            </td>
+            <td>
+              <span>{{ employeeDetail.registrationStart }}</span>              
+            </td>
+          </tr>
+                 <tr>
+            <td>
+              <label><b>Ngày bắt kết thúc đăng kí</b></label>
+            </td>
+            <td>
+              <span>{{ employeeDetail.registrationEnd }}</span>              
+            </td>
+          </tr>
+                 <tr>
+            <td>
+              <label><b>Ngày bắt học phần</b></label>
+            </td>
+            <td>
+              <span>{{ employeeDetail.startDate }}</span>              
+            </td>
+          </tr>
+                 <tr>
+            <td>
+              <label><b>Ngày kết thúc học phần</b></label>
+            </td>
+            <td>
+              <span>{{ employeeDetail.endDate }}</span>              
+            </td>
+          </tr>
+                 <tr>
+            <td>
+              <label><b>Ngày tạo</b></label>
+            </td>
+            <td>
+              <span>{{ employeeDetail.createdDate }}</span>              
+            </td>
+          </tr>
+                 <tr>
+            <td>
+              <label><b>Người tạo</b></label>
+            </td>
+            <td>
+              <span>{{ employeeDetail.userCreated }}</span>              
+            </td>
+          </tr>
+  
+
+        </tbody>
+      </table>       
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,157 @@
+<div class="container-xl">
+    <div class="table-responsive">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h4><b>Lịch học 2025</b></h4>
+                        <!-- <h4><b>s Employee</b></h4> -->
+
+                    </div>
+                    <div class="col-sm-6">
+
+                        <a href="#" routerLink="/Home" class="btn btn-success back"><i
+                                class='fas fa-arrow-circle-left'></i>
+                            &nbsp;Back</a>
+
+                    </div>
+                </div>
+
+            </div>
+            <full-calendar [options]="calendarOptions"></full-calendar>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- <div class="modal-dialog "> -->
+    <div class="modal-dialog custom-modal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Đăng kí tín chỉ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-12 mb-3 mb-lg-5">
+                                <div class="position-relative card table-nowrap table-card">
+                                    <div class="card-header align-items-center">
+                                        <h5 class="mb-0">Danh sách môn học</h5>
+                                        <!-- <p class="mb-0 small text-muted">1 Pending</p> -->
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table mb-0">
+                                            <thead class="small text-uppercase bg-body text-muted">
+                                                <tr>
+                                                    <th>Mã môn học</th>
+                                                    <th>Tên môn học</th>
+                                                    <th>Số tín chỉ</th>
+                                                    <th>Tiết</th>
+                                                    <th>Số sinh viên</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let subject of subjectList" class="align-middle">
+                                                    <td>
+                                                        {{ subject.code }}
+                                                    </td>
+                                                    <td> {{ subject.name }}</td>
+                                                    <td> {{ subject.credits }}</td>
+                                                    <td>
+                                                        <span> {{ subject.lessonStart }}->{{ subject.lessonEnd}}</span>
+                                                    <td>
+                                                        {{ subject.studentNumberMax }}
+                                                    </td>
+                                                         <td>
+                                                       <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="registerSubject(subject.id)" >Đăng kí</button>
+                                                    </td>
+                                                </tr>
+                                                <!-- <tr class="align-middle">
+                                                    <td>
+                                                        #012458780
+                                                    </td>
+                                                    <td>19 Aug, 2021</td>
+                                                    <td>Edith Koenig</td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <span><i class="fa fa-arrow-down"
+                                                                    aria-hidden="true"></i></span>
+                                                            <span>$641.64</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <span
+                                                            class="badge fs-6 fw-normal bg-tint-warning text-warning">Pending</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="align-middle">
+                                                    <td>
+                                                        #76444326
+                                                    </td>
+                                                    <td>03 April, 2021</td>
+                                                    <td>Carrie Blount</td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <span><i class="fa fa-arrow-down"
+                                                                    aria-hidden="true"></i></span>
+                                                            <span>$12,457</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <span
+                                                            class="badge fs-6 fw-normal bg-tint-success text-success">Completed</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="align-middle">
+                                                    <td>
+                                                        #12498745
+                                                    </td>
+                                                    <td>15 March, 2021</td>
+                                                    <td>Ander Durham</td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <span><i class="fa fa-arrow-down"
+                                                                    aria-hidden="true"></i></span>
+                                                            <span>$785</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <span
+                                                            class="badge fs-6 fw-normal bg-tint-success text-success">Completed</span>
+                                                    </td>
+                                                </tr>
+                                                <tr class="align-middle">
+                                                    <td>
+                                                        #87444654
+                                                    </td>
+                                                    <td>23 Jan, 2021</td>
+                                                    <td>Netflix Inc.</td>
+                                                    <td>
+                                                        <div class="d-flex align-items-center">
+                                                            <span><i class="fa fa-arrow-up"
+                                                                    aria-hidden="true"></i></span>
+                                                            <span>$199</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <span
+                                                            class="badge fs-6 fw-normal bg-tint-success text-success">Completed</span>
+                                                    </td>
+                                                </tr> -->
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <!-- <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Lưu</button> -->
+                </div>
+            </div>
+        </div>
+    </div>

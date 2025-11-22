@@ -1,0 +1,116 @@
+<style>
+    /* Color of the links BEFORE scroll */
+    .navbar-scroll .nav-link,
+    .navbar-scroll .navbar-toggler-icon,
+    .navbar-scroll .navbar-brand {
+        color: #262626;
+    }
+
+    /* Color of the navbar BEFORE scroll */
+    .navbar-scroll {
+        background-color: #FFC017;
+    }
+
+    /* Color of the links AFTER scroll */
+    .navbar-scrolled .nav-link,
+    .navbar-scrolled .navbar-toggler-icon,
+    .navbar-scroll .navbar-brand {
+        color: #262626;
+    }
+
+    /* Color of the navbar AFTER scroll */
+    .navbar-scrolled {
+        background-color: #fff;
+    }
+
+    /* An optional height of the navbar AFTER scroll */
+    .navbar.navbar-scroll.navbar-scrolled {
+        padding-top: auto;
+        padding-bottom: auto;
+    }
+
+    .bg-light {
+        --bs-bg-opacity: 1;
+        background-color: #dee2e6 !important;
+    }
+
+    .navbar-brand {
+        font-size: unset;
+        height: 3.5rem;
+    }
+</style>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <!-- Container wrapper -->
+    <div class="container">
+
+        <a *ngIf="role !== 'teacher'" (click)="registerSubject()" class="nav-link d-flex flex-column text-center active"
+            aria-current="page"><i class="fas fa-home fa-lg my-2"></i><span class="small">Đăng kí lịch học</span></a>
+
+        <a *ngIf="role == 'teacher'" (click)="home()" class="nav-link d-flex flex-column text-center active"
+            aria-current="page"><i class="fas fa-home fa-lg my-2"></i><span class="small">Trang chủ</span></a>
+        <a class="nav-link d-flex flex-column text-center" aria-current="page"><i
+                class="fas fa-user-friends fa-lg my-2"></i><span class="small">Thông tin bản thân</span></a>
+        <a *ngIf="role !== 'teacher'" (click)="clendar()" class="nav-link d-flex flex-column text-center"
+            aria-current="page"><i class="fas fa-briefcase fa-lg my-2"></i><span class="small">Thời khoá biểu
+
+            </span></a>
+        <!-- Navbar brand -->
+        <!-- <a class="navbar-brand" href="#"><i class="fab fa-linkedin fa-2x"></i></a> -->
+        <!-- Search form -->
+        <!-- <form class="input-group" style="width: 400px">
+      <input type="search" class="form-control" placeholder="Type query" aria-label="Search" />
+      <button class="btn btn-outline-primary" type="button" data-mdb-ripple-init data-mdb-ripple-color="dark" style="padding: .45rem 1.5rem .35rem;">
+        Search
+      </button>
+    </form> -->
+
+        <!-- Toggle button -->
+        <!-- <button class="navbar-toggler" type="button" data-mdb-collapse-init
+      data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <i class="fas fa-bars"></i>
+    </button> -->
+
+        <!-- Collapsible wrapper -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Left links -->
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+                <!-- <li class="nav-item">
+        
+        </li>
+        <li class="nav-item">
+        
+        </li>
+        <li class="nav-item">
+          <a class="nav-link d-flex flex-column text-center" aria-current="page" ><i class="fas fa-comment-dots fa-lg my-2"></i><span class="small">Messaging</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link d-flex flex-column text-center" aria-current="page" ><i class="fas fa-bell fa-lg my-2"></i><span class="small">Notifications</span></a>
+        </li> -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdownMenuLink"
+                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(9).jpg" class="rounded-circle"
+                            height="30" alt="" />
+                        {{ username }}
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                        <!-- <li><a class="dropdown-item" href="#">My profile</a></li>
+    <li><a class="dropdown-item" href="#">Settings</a></li> -->
+                        <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+                    </ul>
+                </li>
+
+
+            </ul>
+            <!-- Left links -->
+        </div>
+        <!-- Collapsible wrapper -->
+    </div>
+    <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
+<router-outlet></router-outlet>

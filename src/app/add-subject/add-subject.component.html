@@ -1,0 +1,311 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.0/css/boxicons.min.css"
+  integrity="sha512-pVCM5+SN2+qwj36KonHToF2p1oIvoU3bsqxphdOIWMYmgr4ZqD3t5DjKvvetKhXGc/ZG5REYTT6ltKfExEei/Q=="
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css"
+  integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
+
+<div class="container">
+  <div class="row align-items-center">
+    <div class="col-md-6">
+      <div class="mb-3">
+        <h5 class="card-title" style="font-size: 24px; font-weight: bold;">
+          Danh sách môn học
+          <span style="font-weight: normal; color: gray; margin-left: 8px;">(834)</span>
+        </h5>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="d-flex flex-wrap align-items-center justify-content-end gap-2 mb-3">
+        <!-- <div>
+          <ul class="nav nav-pills">
+            <li class="nav-item">
+              <a aria-current="page" href="#" class="router-link-active router-link-exact-active nav-link active"
+                data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="List"
+                aria-label="List">
+                <i class="bx bx-list-ul"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link" data-bs-toggle="tooltip" data-bs-placement="top" title=""
+                data-bs-original-title="Grid" aria-label="Grid"><i class="bx bx-grid-alt"></i></a>
+            </li>
+          </ul>
+        </div> -->
+        <div>
+   <a (click)="AddEmployee()" data-bs-toggle="modal" data-bs-target=".add-new" class="btn custom-green">
+  <i class="bx bx-plus me-1"></i> Thêm mới môn học
+</a>
+        </div>
+        <!-- <div class="dropdown">
+          <a class="btn btn-link text-muted py-1 font-size-16 shadow-none dropdown-toggle" href="#" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-dots-horizontal-rounded"></i></a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="">
+        <div class="table-responsive">
+          <table class="table project-list-table table-nowrap align-middle table-borderless">
+            <thead>
+              <tr>
+                <th scope="col" class="ps-4" style="width: 50px;">
+
+                </th>
+                <th scope="col">Tên môn học</th>
+                <th scope="col">Mã môn học</th>
+                <th scope="col">Số tín chỉ</th>
+                <th scope="col">Tên khoa</th>
+                <!-- <th scope="col">Số tiết</th> -->
+                <th scope="col">Giáo viên</th>
+                <th scope="col">Tên phòng</th>
+                <th scope="col" style="width: 200px;">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- *ngFor="let item of list" -->
+              <tr *ngFor="let employee of employeeList">
+                <th scope="row" class="ps-4">
+
+                </th>
+ 
+                <td><a class="text-body">{{ employee.name }}</a></td>
+                <td><a class="text-body">{{ employee.code }}</a></td>
+                <td><a class="text-body">{{ employee.credits }}</a></td>
+                <td><a class="text-body">{{ employee.department }}</a></td>
+                <td><a class="text-body">{{ employee.teacherName}} </a></td>
+                <td><a class="text-body">{{ employee.roomName }}</a></td>
+            
+                <td>
+                  <ul class="list-inline mb-0">
+                    <li class="list-inline-item">
+                      <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
+                        class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>
+                    </li>
+                    <li (click)="deleteById(employee.id)" class="list-inline-item">
+                      <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
+                        class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>
+                    </li>
+                    <li class="list-inline-item dropdown">
+                      <a class="text-muted dropdown-toggle font-size-18 px-2" href="#" role="button"
+                        data-bs-toggle="dropdown" aria-haspopup="true"><i class="bx bx-dots-vertical-rounded"></i></a>
+                      <div class="dropdown-menu dropdown-menu-end">
+                        <a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Another
+                          action</a><a class="dropdown-item" href="#">Something else here</a>
+                      </div>
+                    </li>
+                  </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row g-0 align-items-center pb-4">
+    <div class="col-sm-6">
+      <div>
+        <p class="mb-sm-0">Showing 1 to 10 of 57 entries</p>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="float-sm-end">
+        <ul class="pagination mb-sm-0">
+          <li class="page-item disabled">
+            <a href="#" class="page-link"><i class="mdi mdi-chevron-left"></i></a>
+          </li>
+          <li class="page-item active"><a href="#" class="page-link">1</a></li>
+          <li class="page-item"><a href="#" class="page-link">2</a></li>
+          <li class="page-item"><a href="#" class="page-link">3</a></li>
+          <li class="page-item"><a href="#" class="page-link">4</a></li>
+          <li class="page-item"><a href="#" class="page-link">5</a></li>
+          <li class="page-item">
+            <a href="#" class="page-link"><i class="mdi mdi-chevron-right"></i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" role="dialog" tabindex="-1" id="user-form-modal">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"  style="font-size: 24px; font-weight: bold;">Nhập thông tin môn học</h5>
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <form #employeeForm="ngForm">
+        <div class="modal-body">
+          <div class="py-1">
+            <form class="form" novalidate="">
+              <div class="row">
+                <div class="col">
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <label>Tên môn học</label>
+                        <input class="form-control" type="text" name="name" [(ngModel)]="addEmployeeForm.name">
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group">
+                        <label>Mã Môn học</label>
+                        <input class="form-control" type="text" name="username" [(ngModel)]="addEmployeeForm.code">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <label>Số tín chỉ</label>
+                        <input class="form-control" type="number" name="name" [(ngModel)]="addEmployeeForm.credits">
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group">
+                        <label>Phòng</label>
+                        <input class="form-control" type="text" name="roomName"
+                          [(ngModel)]="addEmployeeForm.roomName">
+                      </div>
+                    </div>
+                  </div>
+                         <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <label>Giáo viên</label>
+                        <input class="form-control" type="text" name="teacherName" [(ngModel)]="addEmployeeForm.teacherName">
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group">
+                        <label>Tên Khoa</label>
+                        <input class="form-control" type="text" name="username"
+                          [(ngModel)]="addEmployeeForm.department">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <label>Số tiết</label>
+                        <input class="form-control" type="number" name="name">
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="row">
+                        <div class="col">
+                          <div class="form-group">
+
+                            <label for="roleSelect">Giờ bắt đầu (Tiết học)</label>
+                            <select class="form-select" id="roleSelect" name="lessonStart"
+                              [(ngModel)]="addEmployeeForm.lessonStart">
+                              <option *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]" [ngValue]="i">{{ i }}</option>
+                            </select>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="form-group">
+                            <!-- <label>Giờ kết thúc</label> -->
+                            <label for="roleSelect">Giờ kết thúc(Tiết học)</label>
+                            <select class="form-select" id="roleSelect" name="lessonEnd" [(ngModel)]="addEmployeeForm.lessonEnd">
+                            <option *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]" [ngValue]="i">{{ i }}</option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <div class="form-group">
+                          <!-- <label>Giờ kết thúc</label> -->
+                          <label for="roleSelect">Thứ trong tuần</label>
+                          <select class="form-select" id="roleSelect" name="dayOfWeek" [(ngModel)]="addEmployeeForm.dayOfWeek">
+                            <option>Thứ 2</option>
+                            <option>Thứ 3</option>
+                            <option>Thứ 4</option>
+                            <option>Thứ 5</option>
+                            <option>Thứ 6</option>
+                            <option>Thứ 7</option>
+                            <option>CN</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group">
+                        <label>Số sinh viên tối đa</label>
+                        <input class="form-control" [(ngModel)]="addEmployeeForm.studentNumberMax" type="number"
+                          name="username">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div class="form-group">
+                        <label>Thời gian bắt đầu học phần
+                        </label>
+                        <input type="date" class="form-control" id="startDate" [(ngModel)]="addEmployeeForm.startDate"
+                          name="startDate">
+                      </div>
+                    </div>
+                    <div class="col">
+                      <!-- <div class="form-group"> -->
+                      <label>Thời gian kết thúc học phần</label>
+                      <input type="date" class="form-control" id="endDate" [(ngModel)]="addEmployeeForm.endDate"
+                        name="endDate">
+                      <!-- </div> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+
+                <div class="col-12 col-sm-5 offset-sm-1 mb-3">
+                  <!-- <div class="mb-2"><b>Keeping in Touch</b></div>
+                <div class="row">
+                  <div class="col">
+                    <label>Email Notifications</label>
+                    <div class="custom-controls-stacked px-2">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="notifications-blog" checked="">
+                        <label class="custom-control-label" for="notifications-blog">Blog posts</label>
+                      </div>
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="notifications-news" checked="">
+                        <label class="custom-control-label" for="notifications-news">Newsletter</label>
+                      </div>
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="custom-control-input" id="notifications-offers" checked="">
+                        <label class="custom-control-label" for="notifications-offers">Personal Offers</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>-->
+                </div>
+              </div>
+              <div class="row">
+                <div class="col d-flex justify-content-end">
+                  <button  class="btn btn-primary" data-bs-dismiss="modal" style="border-color: pink;background-color: pink; font-weight: bold;" type="submit" (click)="addSubject(employeeForm.form.valid)">Thêm mới</button>
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
