@@ -1,0 +1,60 @@
+/* ===== FOOTER HIỆN ĐẠI ===== */
+.footer {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(0,0,0,0.1);
+    padding: 25px 0;
+    margin-top: 40px;
+    color: #333;
+}
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.wrapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1;
+}
+
+.footer .footer-title {
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #0d6efd;
+}
+
+.footer a {
+    color: #333;
+    text-decoration: none;
+    transition: color .2s;
+}
+
+.footer a:hover {
+    color: #0d6efd;
+}
+
+.footer .social-icons i {
+    font-size: 20px;
+    margin-right: 12px;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.footer .social-icons i:hover {
+    color: #0d6efd;
+    transform: translateY(-3px);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 15px;
+    font-size: 14px;
+    color: #555;
+    border-top: 1px solid rgba(0,0,0,0.1);
+}

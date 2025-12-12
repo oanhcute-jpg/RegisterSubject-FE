@@ -11,7 +11,7 @@
       <div class="mb-3">
         <h5 class="card-title" style="font-size: 24px; font-weight: bold;">
           Danh sách môn học
-          <span style="font-weight: normal; color: gray; margin-left: 8px;">(834)</span>
+          <span style="font-weight: normal; color: gray; margin-left: 8px;"></span>
         </h5>
       </div>
     </div>
@@ -33,9 +33,9 @@
           </ul>
         </div> -->
         <div>
-   <a (click)="AddEmployee()" data-bs-toggle="modal" data-bs-target=".add-new" class="btn custom-green">
-  <i class="bx bx-plus me-1"></i> Thêm mới môn học
-</a>
+          <a (click)="AddEmployee()" data-bs-toggle="modal" data-bs-target=".add-new" class="btn custom-green">
+            <i class="bx bx-plus me-1"></i> Thêm mới môn học
+          </a>
         </div>
         <!-- <div class="dropdown">
           <a class="btn btn-link text-muted py-1 font-size-16 shadow-none dropdown-toggle" href="#" role="button"
@@ -75,33 +75,49 @@
                 <th scope="row" class="ps-4">
 
                 </th>
- 
+
                 <td><a class="text-body">{{ employee.name }}</a></td>
                 <td><a class="text-body">{{ employee.code }}</a></td>
                 <td><a class="text-body">{{ employee.credits }}</a></td>
                 <td><a class="text-body">{{ employee.department }}</a></td>
                 <td><a class="text-body">{{ employee.teacherName}} </a></td>
                 <td><a class="text-body">{{ employee.roomName }}</a></td>
-            
+
                 <td>
                   <ul class="list-inline mb-0">
                     <li class="list-inline-item">
-                      <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit"
-                        class="px-2 text-primary"><i class="bx bx-pencil font-size-18"></i></a>
+                      <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top"
+                        (click)="openEditModal(employee)" title="Xem chi tiết và sửa" class="px-2 text-primary"><i
+                          class="bx bx-pencil font-size-18"></i></a>
                     </li>
                     <li (click)="deleteById(employee.id)" class="list-inline-item">
                       <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"
                         class="px-2 text-danger"><i class="bx bx-trash-alt font-size-18"></i></a>
                     </li>
-                    <li class="list-inline-item dropdown">
+
+                    <li class="list-inline-item">
+                      <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top"
+                        (click)="openEditModal(employee)" title="Danh sách sinh viên đã đăng kí"
+                        class="px-2 text-primary"> <i class='bx bx-user font-size-18'></i> </a>
+                    </li>
+                    <li class="list-inline-item">
+                      <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top"
+                        (click)="openEditModal(employee)" title="Danh sách sinh viên đã đăng kí"
+                        class="px-2 text-primary"> <button class="btn btn-primary custom-btn" type="submit">
+                         Mở đăng kí
+                        </button></a>
+                    </li>
+
+                    <!-- <li class="list-inline-item dropdown">
                       <a class="text-muted dropdown-toggle font-size-18 px-2" href="#" role="button"
                         data-bs-toggle="dropdown" aria-haspopup="true"><i class="bx bx-dots-vertical-rounded"></i></a>
                       <div class="dropdown-menu dropdown-menu-end">
                         <a class="dropdown-item" href="#">Action</a><a class="dropdown-item" href="#">Another
                           action</a><a class="dropdown-item" href="#">Something else here</a>
                       </div>
-                    </li>
+                    </li> -->
                   </ul>
+
                 </td>
               </tr>
             </tbody>
@@ -113,197 +129,259 @@
   <div class="row g-0 align-items-center pb-4">
     <div class="col-sm-6">
       <div>
-        <p class="mb-sm-0">Showing 1 to 10 of 57 entries</p>
+        <!-- <p class="mb-sm-0">Showing 1 to 10 of 57 entries</p> -->
       </div>
     </div>
     <div class="col-sm-6">
       <div class="float-sm-end">
         <ul class="pagination mb-sm-0">
-          <li class="page-item disabled">
-            <a href="#" class="page-link"><i class="mdi mdi-chevron-left"></i></a>
+
+          <!-- Nút Previous -->
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <a class="page-link" (click)="changePage(currentPage - 1)">
+              <i class="mdi mdi-chevron-left"></i>
+            </a>
           </li>
-          <li class="page-item active"><a href="#" class="page-link">1</a></li>
-          <li class="page-item"><a href="#" class="page-link">2</a></li>
-          <li class="page-item"><a href="#" class="page-link">3</a></li>
-          <li class="page-item"><a href="#" class="page-link">4</a></li>
-          <li class="page-item"><a href="#" class="page-link">5</a></li>
-          <li class="page-item">
-            <a href="#" class="page-link"><i class="mdi mdi-chevron-right"></i></a>
+
+          <!-- Các số trang -->
+          <li class="page-item" *ngFor="let p of totalPagesArr" [class.active]="p === currentPage">
+            <a class="page-link" (click)="changePage(p)">{{ p }}</a>
+          </li>
+
+          <!-- Nút Next -->
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <a class="page-link" (click)="changePage(currentPage + 1)">
+              <i class="mdi mdi-chevron-right"></i>
+            </a>
           </li>
         </ul>
+
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal fade" role="dialog" tabindex="-1" id="user-form-modal">
+<div class="modal fade" role="dialog" tabindex="-1" id="userFormModal" #userFormModal>
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title"  style="font-size: 24px; font-weight: bold;">Nhập thông tin môn học</h5>
-        <button type="button" class="close" data-dismiss="modal">
+        <h5 class="modal-title" style="font-size: 24px; font-weight: bold;">Nhập thông tin môn học</h5>
+        <button (click)="closeModal()" type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
       </div>
-      <form #employeeForm="ngForm">
+
+      <!-- FORM -->
+      <form #employeeForm="ngForm" (ngSubmit)="addSubject(employeeForm.valid)" novalidate>
         <div class="modal-body">
-          <div class="py-1">
-            <form class="form" novalidate="">
+
+          <div class="row">
+            <div class="col">
+
+              <!-- Tên môn học -->
+              <div class="form-group mb-3">
+                <label>Tên môn học</label>
+                <input class="form-control" type="text" name="name" required [(ngModel)]="addEmployeeForm.name"
+                  #nameRef="ngModel">
+
+                <div *ngIf="nameRef.invalid && nameRef.touched" class="text-danger">
+                  Tên môn học không được để trống
+                </div>
+              </div>
+
+              <!-- Mã môn học -->
+              <div class="form-group mb-3">
+                <label>Mã môn học</label>
+                <input class="form-control" type="text" name="code" required [(ngModel)]="addEmployeeForm.code"
+                  #codeRef="ngModel">
+
+                <div *ngIf="codeRef.invalid && codeRef.touched" class="text-danger">
+                  Mã môn học không được để trống
+                </div>
+              </div>
+
               <div class="row">
+                <div class="col">
+                  <!-- Số tín chỉ -->
+                  <div class="form-group mb-3">
+                    <label>Số tín chỉ</label>
+                    <input class="form-control" type="number" name="credits" required
+                      [(ngModel)]="addEmployeeForm.credits" #creditsRef="ngModel">
+
+                    <div *ngIf="creditsRef.invalid && creditsRef.touched" class="text-danger">
+                      Vui lòng nhập số tín chỉ
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col">
+                  <!-- Phòng -->
+                  <div class="form-group mb-3">
+                    <label>Phòng</label>
+                    <input class="form-control" type="text" name="roomName" required
+                      [(ngModel)]="addEmployeeForm.roomName" #roomRef="ngModel">
+
+                    <div *ngIf="roomRef.invalid && roomRef.touched" class="text-danger">
+                      Vui lòng nhập tên phòng
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col">
+                  <!-- Giáo viên -->
+                  <div class="form-group mb-3">
+                    <label>Giáo viên</label>
+                    <input class="form-control" type="text" name="teacherName" required
+                      [(ngModel)]="addEmployeeForm.teacherName" #teacherRef="ngModel">
+
+                    <div *ngIf="teacherRef.invalid && teacherRef.touched" class="text-danger">
+                      Vui lòng nhập tên giáo viên
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col">
+                  <!-- Khoa -->
+                  <div class="form-group mb-3">
+                    <label>Khoa</label>
+                    <input class="form-control" type="text" name="department" required
+                      [(ngModel)]="addEmployeeForm.department" #departmentRef="ngModel">
+
+                    <div *ngIf="departmentRef.invalid && departmentRef.touched" class="text-danger">
+                      Vui lòng nhập tên khoa
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col">
+                  <!-- Số tiết -->
+                  <div class="form-group mb-3">
+                    <label>Số tiết</label>
+                    <input class="form-control" type="number" name="classPeriodNumber" required
+                      [(ngModel)]="addEmployeeForm.classPeriodNumber" #periodRef="ngModel">
+
+                    <div *ngIf="periodRef.invalid && periodRef.touched" class="text-danger">
+                      Vui lòng nhập số tiết
+                    </div>
+                  </div>
+                </div>
+
                 <div class="col">
                   <div class="row">
                     <div class="col">
-                      <div class="form-group">
-                        <label>Tên môn học</label>
-                        <input class="form-control" type="text" name="name" [(ngModel)]="addEmployeeForm.name">
-                      </div>
-                    </div>
-                    <div class="col">
-                      <div class="form-group">
-                        <label>Mã Môn học</label>
-                        <input class="form-control" type="text" name="username" [(ngModel)]="addEmployeeForm.code">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col">
-                      <div class="form-group">
-                        <label>Số tín chỉ</label>
-                        <input class="form-control" type="number" name="name" [(ngModel)]="addEmployeeForm.credits">
-                      </div>
-                    </div>
-                    <div class="col">
-                      <div class="form-group">
-                        <label>Phòng</label>
-                        <input class="form-control" type="text" name="roomName"
-                          [(ngModel)]="addEmployeeForm.roomName">
-                      </div>
-                    </div>
-                  </div>
-                         <div class="row">
-                    <div class="col">
-                      <div class="form-group">
-                        <label>Giáo viên</label>
-                        <input class="form-control" type="text" name="teacherName" [(ngModel)]="addEmployeeForm.teacherName">
-                      </div>
-                    </div>
-                    <div class="col">
-                      <div class="form-group">
-                        <label>Tên Khoa</label>
-                        <input class="form-control" type="text" name="username"
-                          [(ngModel)]="addEmployeeForm.department">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col">
-                      <div class="form-group">
-                        <label>Số tiết</label>
-                        <input class="form-control" type="number" name="name">
-                      </div>
-                    </div>
-                    <div class="col">
-                      <div class="row">
-                        <div class="col">
-                          <div class="form-group">
+                      <!-- Giờ bắt đầu -->
+                      <div class="form-group mb-3">
+                        <label>Giờ bắt đầu (Tiết)</label>
+                        <select class="form-select" name="lessonStart" required
+                          [(ngModel)]="addEmployeeForm.lessonStart" #startRef="ngModel">
+                          <option *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]" [ngValue]="i">{{ i }}</option>
+                        </select>
 
-                            <label for="roleSelect">Giờ bắt đầu (Tiết học)</label>
-                            <select class="form-select" id="roleSelect" name="lessonStart"
-                              [(ngModel)]="addEmployeeForm.lessonStart">
-                              <option *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]" [ngValue]="i">{{ i }}</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div class="col">
-                          <div class="form-group">
-                            <!-- <label>Giờ kết thúc</label> -->
-                            <label for="roleSelect">Giờ kết thúc(Tiết học)</label>
-                            <select class="form-select" id="roleSelect" name="lessonEnd" [(ngModel)]="addEmployeeForm.lessonEnd">
-                            <option *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]" [ngValue]="i">{{ i }}</option>
-                            </select>
-                          </div>
+                        <div *ngIf="startRef.invalid && startRef.touched" class="text-danger">
+                          Vui lòng chọn giờ bắt đầu
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="row">
+
                     <div class="col">
-                      <div class="form-group">
-                        <div class="form-group">
-                          <!-- <label>Giờ kết thúc</label> -->
-                          <label for="roleSelect">Thứ trong tuần</label>
-                          <select class="form-select" id="roleSelect" name="dayOfWeek" [(ngModel)]="addEmployeeForm.dayOfWeek">
-                            <option>Thứ 2</option>
-                            <option>Thứ 3</option>
-                            <option>Thứ 4</option>
-                            <option>Thứ 5</option>
-                            <option>Thứ 6</option>
-                            <option>Thứ 7</option>
-                            <option>CN</option>
-                          </select>
+                      <!-- Giờ kết thúc -->
+                      <div class="form-group mb-3">
+                        <label>Giờ kết thúc (Tiết)</label>
+                        <select class="form-select" name="lessonEnd" required [(ngModel)]="addEmployeeForm.lessonEnd"
+                          #endRef="ngModel">
+                          <option *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]" [ngValue]="i">{{ i }}</option>
+                        </select>
+
+                        <div *ngIf="endRef.invalid && endRef.touched" class="text-danger">
+                          Vui lòng chọn giờ kết thúc
                         </div>
                       </div>
-                    </div>
-                    <div class="col">
-                      <div class="form-group">
-                        <label>Số sinh viên tối đa</label>
-                        <input class="form-control" [(ngModel)]="addEmployeeForm.studentNumberMax" type="number"
-                          name="username">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col">
-                      <div class="form-group">
-                        <label>Thời gian bắt đầu học phần
-                        </label>
-                        <input type="date" class="form-control" id="startDate" [(ngModel)]="addEmployeeForm.startDate"
-                          name="startDate">
-                      </div>
-                    </div>
-                    <div class="col">
-                      <!-- <div class="form-group"> -->
-                      <label>Thời gian kết thúc học phần</label>
-                      <input type="date" class="form-control" id="endDate" [(ngModel)]="addEmployeeForm.endDate"
-                        name="endDate">
-                      <!-- </div> -->
                     </div>
                   </div>
                 </div>
               </div>
+
               <div class="row">
+                <div class="col">
+                  <!-- Thứ -->
+                  <div class="form-group mb-3">
+                    <label>Thứ trong tuần</label>
+                    <select class="form-select" name="dayOfWeek" required [(ngModel)]="addEmployeeForm.dayOfWeek"
+                      #dayRef="ngModel">
+                      <option value="">-- Chọn thứ --</option>
+                      <option>Thứ 2</option>
+                      <option>Thứ 3</option>
+                      <option>Thứ 4</option>
+                      <option>Thứ 5</option>
+                      <option>Thứ 6</option>
+                      <option>Thứ 7</option>
+                      <option>CN</option>
+                    </select>
 
-                <div class="col-12 col-sm-5 offset-sm-1 mb-3">
-                  <!-- <div class="mb-2"><b>Keeping in Touch</b></div>
-                <div class="row">
-                  <div class="col">
-                    <label>Email Notifications</label>
-                    <div class="custom-controls-stacked px-2">
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="notifications-blog" checked="">
-                        <label class="custom-control-label" for="notifications-blog">Blog posts</label>
-                      </div>
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="notifications-news" checked="">
-                        <label class="custom-control-label" for="notifications-news">Newsletter</label>
-                      </div>
-                      <div class="custom-control custom-checkbox">
-                        <input type="checkbox" class="custom-control-input" id="notifications-offers" checked="">
-                        <label class="custom-control-label" for="notifications-offers">Personal Offers</label>
-                      </div>
+                    <div *ngIf="dayRef.invalid && dayRef.touched" class="text-danger">
+                      Vui lòng chọn thứ học
                     </div>
                   </div>
-                </div>-->
                 </div>
-              </div>
-              <div class="row">
-                <div class="col d-flex justify-content-end">
-                  <button  class="btn btn-primary" data-bs-dismiss="modal" style="border-color: pink;background-color: pink; font-weight: bold;" type="submit" (click)="addSubject(employeeForm.form.valid)">Thêm mới</button>
-                </div>
-              </div>
-            </form>
 
+                <div class="col">
+                  <!-- Số sinh viên tối đa -->
+                  <div class="form-group mb-3">
+                    <label>Số sinh viên tối đa</label>
+                    <input class="form-control" type="number" name="studentNumberMax" required
+                      [(ngModel)]="addEmployeeForm.studentNumberMax" #maxRef="ngModel">
+
+                    <div *ngIf="maxRef.invalid && maxRef.touched" class="text-danger">
+                      Vui lòng nhập số sinh viên tối đa
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <!-- Ngày bắt đầu -->
+                <div class="col">
+                  <div class="form-group mb-3">
+                    <label>Bắt đầu học phần</label>
+                    <input type="date" class="form-control" name="startDate" required
+                      [(ngModel)]="addEmployeeForm.startDate" #startDateRef="ngModel">
+
+                    <div *ngIf="startDateRef.invalid && startDateRef.touched" class="text-danger">
+                      Vui lòng chọn ngày bắt đầu
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Ngày kết thúc -->
+                <div class="col">
+                  <div class="form-group mb-3">
+                    <label>Kết thúc học phần</label>
+                    <input type="date" class="form-control" name="endDate" required
+                      [(ngModel)]="addEmployeeForm.endDate" #endDateRef="ngModel">
+
+                    <div *ngIf="endDateRef.invalid && endDateRef.touched" class="text-danger">
+                      Vui lòng chọn ngày kết thúc
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </div>
+
+          <!-- BUTTON -->
+          <div class="row">
+            <div class="col d-flex justify-content-end">
+              <button class="btn btn-primary custom-btn" type="submit" [disabled]="employeeForm.invalid">
+                {{ mode === 'add' ? 'Thêm mới' : 'Cập nhật' }}
+              </button>
+            </div>
+          </div>
+
         </div>
       </form>
     </div>

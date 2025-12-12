@@ -59,6 +59,7 @@ const MODALS: { [name: string]: Type<any> } = {
 })
 export class HomeComponent implements OnInit {
   addEmployeeForm: employeeForm = new employeeForm();
+  subjectResp: SubjectResp = new SubjectResp();
   closeResult = '';
   employeeList: any = [];
   constructor(
@@ -74,7 +75,7 @@ export class HomeComponent implements OnInit {
   isSubmitted: boolean = false;
   ngOnInit(): void {
     // this.getAllEmployee();
-    this.subjectService.getAllSubject().subscribe((data) => {
+    this.subjectService.getAllSubject(this.subjectResp).subscribe((data) => {
       this.employeeList = data;
     });
   }
@@ -142,12 +143,12 @@ export class HomeComponent implements OnInit {
   addSubject(isValid: any) {
     this.isSubmitted = true;
     if (isValid) {
-        console.log(this.addEmployeeForm);
+      console.log(this.addEmployeeForm);
       this.subjectService.createSubject(this.addEmployeeForm).subscribe(
         async (data) => {
           if (data != null) {
             var resultData = data;
-          
+
             if (resultData != null) {
               //  this.toastr.success(resultData.message);
               setTimeout(() => {
@@ -164,11 +165,16 @@ export class HomeComponent implements OnInit {
         }
       );
     }
-        this.subjectService.getAllSubject().subscribe((data) => {
+    this.subjectService.getAllSubject(this.subjectResp).subscribe((data) => {
       this.employeeList = data;
     });
-  window.location.reload();
+    window.location.reload();
   }
+}
+export class SubjectResp {
+  search: String = '';
+  pageSize: any;
+  page: any;
 }
 export class employeeForm {
   name: String = '';

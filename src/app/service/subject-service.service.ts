@@ -21,8 +21,8 @@ export class SubjectServiceService {
     getAllRegisterSubjectByUser(type:any): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/get/register-subject-all/${type}`);
   }
-  getAllSubject(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/get/all`);
+  getAllSubject(subjectReq:any): Observable<any> {
+    return this.http.post<any[]>(`${this.baseUrl}/get/all`,subjectReq);
   }
   getAllRegisterSubject( dayOfWeek:string,lessonStart:number): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/get/list-register-subject?dayOfWeek=`+dayOfWeek+`&lessonStart=`+lessonStart);

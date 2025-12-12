@@ -34,9 +34,15 @@
             <td>{{ employee.registrationStart }}</td>
             <td>{{ employee.registrationEnd }}</td>
             <td>
-              <a href="#" [routerLink]="['/ViewEmployee/', employee.id]" class="btn"><i class='fas fa-eye view'></i></a>
-              <a href="#" [routerLink]="['/EditEmployee/', employee.id]" class="btn"><i class="fa fa-edit edit"></i></a>
+              <a [routerLink]="['/ViewEmployee/', employee.id]" class="btn"><i class='fas fa-eye view'></i></a>
+              <a [routerLink]="['/ViewEmployee/', employee.id]" class="btn">sssssss</a>
+              <a [routerLink]="['/EditEmployee/', employee.id]" class="btn"><i class="fa fa-edit edit"></i></a>
+              <a [routerLink]="['/EditEmployee/', employee.id]" class="btn"><i class="fa fa-edit edit"></i></a>
+              <a [routerLink]="['/EditEmployee/', employee.id]" class="btn"><i class="bi bi-person-fill"></i></a>
+
               <button type="button" (click)="deleteEmployeeConfirmation(employee)" class="btn"><i
+                  class='fas fa-trash-alt delete'></i></button>
+                   <button type="button" (click)="deleteEmployeeConfirmation(employee)" class="btn"><i
                   class='fas fa-trash-alt delete'></i></button>
             </td>
           </tr>
@@ -115,8 +121,9 @@
                           <div class="form-group">
                             <!-- <label>Giờ kết thúc</label> -->
                             <label for="roleSelect">Giờ kết thúc(Tiết học)</label>
-                            <select class="form-select" id="roleSelect" name="lessonEnd" [(ngModel)]="addEmployeeForm.lessonEnd">
-                            <option *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]" [ngValue]="i">{{ i }}</option>
+                            <select class="form-select" id="roleSelect" name="lessonEnd"
+                              [(ngModel)]="addEmployeeForm.lessonEnd">
+                              <option *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]" [ngValue]="i">{{ i }}</option>
                             </select>
                           </div>
                         </div>
@@ -129,7 +136,8 @@
                         <div class="form-group">
                           <!-- <label>Giờ kết thúc</label> -->
                           <label for="roleSelect">Thứ trong tuần</label>
-                          <select class="form-select" id="roleSelect" name="dayOfWeek" [(ngModel)]="addEmployeeForm.dayOfWeek">
+                          <select class="form-select" id="roleSelect" name="dayOfWeek"
+                            [(ngModel)]="addEmployeeForm.dayOfWeek">
                             <option>Thứ 2</option>
                             <option>Thứ 3</option>
                             <option>Thứ 4</option>
@@ -195,7 +203,8 @@
               </div>
               <div class="row">
                 <div class="col d-flex justify-content-end">
-                  <button class="btn btn-primary" data-bs-dismiss="modal" type="submit" (click)="addSubject(employeeForm.form.valid)">Save
+                  <button class="btn btn-primary" data-bs-dismiss="modal" type="submit"
+                    (click)="addSubject(employeeForm.form.valid)">Save
                     Changes</button>
                 </div>
               </div>

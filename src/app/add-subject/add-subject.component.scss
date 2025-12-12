@@ -102,3 +102,16 @@ a {
     background-color: #218838; /* màu xanh lá khi hover */
     border-color: #1e7e34;
 }
+.custom-btn {
+  border-color: pink;
+  background-color: pink;
+  font-weight: bold;
+  color: white;
+  transition: 0.3s; /* Hiệu ứng mượt */
+}
+
+.custom-btn:hover {
+  background-color: #ff99cc; /* màu sáng hơn khi hover */
+  border-color: #ff99cc;
+  cursor: pointer;
+}

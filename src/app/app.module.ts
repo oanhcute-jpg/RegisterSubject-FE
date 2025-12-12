@@ -30,6 +30,7 @@ import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { AuthLayoutComponent } from './auth-layout/auth-layout.component';
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { ChecktokenInterceptor } from './interceptor/checktoken.interceptor';
+import { ManageUserComponent } from './manage-user/manage-user.component';
 // đăng ký plugin
 // FullCalendarModule.registerPlugins([
 //   dayGridPlugin,
@@ -50,6 +51,7 @@ import { ChecktokenInterceptor } from './interceptor/checktoken.interceptor';
     LoginComponent,
     MainLayoutComponent,
     AuthLayoutComponent,
+    ManageUserComponent,
   ],
   imports: [
     FullCalendarModule,
