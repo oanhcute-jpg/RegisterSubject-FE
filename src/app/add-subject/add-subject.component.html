@@ -101,12 +101,15 @@
                         class="px-2 text-primary"> <i class='bx bx-user font-size-18'></i> </a>
                     </li>
                     <li class="list-inline-item">
-                      <a href="javascript:void(0);" data-bs-toggle="tooltip" data-bs-placement="top"
-                        (click)="openEditModal(employee)" title="Danh sách sinh viên đã đăng kí"
-                        class="px-2 text-primary"> <button class="btn btn-primary custom-btn" type="submit">
-                         Mở đăng kí
-                        </button></a>
+                      <button class="btn custom-btn" [ngClass]="employee.isRegister ? 'btn-danger' : 'btn-primary'"
+                        (click)="toggleRegister(employee)" data-bs-toggle="tooltip"
+                        [title]="employee.isRegister ? 'Đóng đăng kí' : 'Mở đăng kí'">
+
+                        {{ employee.isRegister ? 'Đóng đăng kí' : 'Mở đăng kí' }}
+
+                      </button>
                     </li>
+
 
                     <!-- <li class="list-inline-item dropdown">
                       <a class="text-muted dropdown-toggle font-size-18 px-2" href="#" role="button"

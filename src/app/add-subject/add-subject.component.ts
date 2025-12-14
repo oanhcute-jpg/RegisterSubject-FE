@@ -224,6 +224,19 @@ export class AddSubjectComponent implements OnInit {
     const end = this.currentPage * this.pageSize;
     this.pagedItems = this.items.slice(start, end);
   }
+  toggleRegister(employee: any) {
+ this.subjectService.openRegister(employee).subscribe(() => {
+      this.getAllSubject();
+    });
+
+  if (employee.isRegister) {
+    console.log('Đã mở đăng kí');
+  } else {
+    console.log('Đã đóng đăng kí');
+  }
+
+  // TODO: gọi API backend cập nhật trạng thái
+}
 
   changePage(page: number) {
     if (page < 1 || page > this.totalPages) return;

@@ -8,33 +8,36 @@ import { Observable } from 'rxjs';
 export class SubjectServiceService {
   private baseUrl = 'http://localhost:8080/subject'; // API demo
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-    deleteSubject(id: number): Observable<any> {
+  deleteSubject(id: number): Observable<any> {
     return this.http.delete<any>(`${this.baseUrl}/delete/${id}`);
   }
 
   // GET
-  getSubjectById(id:any): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/get/`+id);
+  getSubjectById(id: any): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/get/` + id);
   }
-    getAllRegisterSubjectByUser(type:any): Observable<any[]> {
+  getAllRegisterSubjectByUser(type: any): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/get/register-subject-all/${type}`);
   }
-  getAllSubject(subjectReq:any): Observable<any> {
-    return this.http.post<any[]>(`${this.baseUrl}/get/all`,subjectReq);
+  getAllSubject(subjectReq: any): Observable<any> {
+    return this.http.post<any[]>(`${this.baseUrl}/get/all`, subjectReq);
   }
-  getAllRegisterSubject( dayOfWeek:string,lessonStart:number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.baseUrl}/get/list-register-subject?dayOfWeek=`+dayOfWeek+`&lessonStart=`+lessonStart);
+  openRegister(subjectReq: any): Observable<any> {
+    return this.http.post<any[]>(`${this.baseUrl}/open/register`, subjectReq);
+  }
+  getAllRegisterSubject(dayOfWeek: string, lessonStart: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/get/list-register-subject?dayOfWeek=` + dayOfWeek + `&lessonStart=` + lessonStart);
   }
   // POST
   createSubject(post: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/add`, post);
   }
-    deleteRegisterSubject(post: any): Observable<any> {
+  deleteRegisterSubject(post: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/delete/register-subject`, post);
   }
-    registerSubject(subject: any): Observable<any> {
+  registerSubject(subject: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/register-subject`, subject);
   }
 
