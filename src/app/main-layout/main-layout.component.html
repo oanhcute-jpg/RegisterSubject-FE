@@ -1,64 +1,68 @@
 <style>
-   /* ===== HEADER STYLE HIỆN ĐẠI ===== */
+    /* ===== HEADER STYLE HIỆN ĐẠI ===== */
 
-.navbar {
-    backdrop-filter: blur(10px);
-    background: #edc7d4  !important;
-    border-bottom: 1px solid rgba(0,0,0,0.08);
-    height: 70px;
-    transition: all .3s ease;
-}
+    .navbar {
+        backdrop-filter: blur(10px);
+        background: #edc7d4 !important;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        height: 70px;
+        transition: all .3s ease;
+        overflow: visible !important;
+    }
 
-.navbar-scrolled {
-    background: #ffffff !important;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-}
+    .navbar-scrolled {
+        background: #ffffff !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    }
 
-/* Icon + text */
-.nav-link {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 13px;
-    padding: 0 18px;
-    color: #333 !important;
-    font-weight: 500;
-    transition: .2s;
-}
+    /* Icon + text */
+    .nav-link {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 13px;
+        padding: 0 18px;
+        color: #333 !important;
+        font-weight: 500;
+        transition: .2s;
+    }
 
-.nav-link i {
-    font-size: 18px;
-    margin-bottom: 3px;
-}
+    .nav-link i {
+        font-size: 18px;
+        margin-bottom: 3px;
+    }
 
-/* Hover */
-.nav-link:hover {
-    color: #0d6efd !important;
-    transform: translateY(-2px);
-}
+    /* Hover */
+    .nav-link:hover {
+        color: #0d6efd !important;
+        transform: translateY(-2px);
+    }
 
-/* Active */
-.nav-link.active {
-    color: #0d6efd !important;
-    font-weight: 600;
-}
+    /* Active */
+    .nav-link.active {
+        color: #0d6efd !important;
+        font-weight: 600;
+    }
 
-.navbar-brand {
-    font-weight: 700;
-    font-size: 20px;
-}
+    .navbar-brand {
+        font-weight: 700;
+        font-size: 20px;
+    }
 
-/* Dropdown */
-.nav-item .dropdown-menu {
-    border-radius: 10px;
-    padding: 10px;
-}
+    /* Dropdown */
+    .nav-item .dropdown-menu {
+        border-radius: 10px;
+        padding: 10px;
+    }
 
-/* Avatar */
-.navbar img {
-    border: 2px solid #fff;
-}
+    /* Avatar */
+    .navbar img {
+        border: 2px solid #fff;
+    }
 
+    /* .dropdown-menu {
+    
+} */
 </style>
 
 <!-- Navbar -->
@@ -68,16 +72,12 @@
         <!-- LEFT MENU -->
         <div class="d-flex align-items-center">
 
-            <a *ngIf="role !== 'teacher'" 
-               (click)="registerSubject()" 
-               class="nav-link active">
+            <a *ngIf="role !== 'teacher'" (click)="registerSubject()" class="nav-link active">
                 <i class="fas fa-home"></i>
                 <span>Đăng kí học</span>
             </a>
 
-            <a *ngIf="role == 'teacher'" 
-               (click)="home()" 
-               class="nav-link active">
+            <a *ngIf="role == 'teacher'" (click)="home()" class="nav-link active">
                 <i class="fas fa-home"></i>
                 <span>Trang chủ</span>
             </a>
@@ -87,9 +87,8 @@
                 <span>Thông tin</span>
             </a>
 
-            <a *ngIf="role !== 'teacher'" 
-               (click)="clendar()" 
-               class="nav-link">
+
+            <a *ngIf="role !== 'teacher'" (click)="clendar()" class="nav-link">
                 <i class="fas fa-calendar-alt"></i>
                 <span>Thời khoá biểu</span>
             </a>
@@ -98,21 +97,26 @@
 
         <!-- RIGHT: USER -->
         <ul class="navbar-nav ms-auto">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle d-flex align-items-center" 
-                   href="#" 
-                   id="navbarDropdownMenuLink"
-                   role="button" 
-                   data-bs-toggle="dropdown">
-                    <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(9).jpg"
-                         class="rounded-circle me-2"
-                         height="34">
+        
+                <div class="nav-link dropdown-toggle d-flex align-items-center" id="navbarDropdownMenuLink"
+                    role="button" data-bs-toggle="dropdown">
+                    <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(9).jpg" class="rounded-circle me-2"
+                        height="34">
                     {{ username }}
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end">
+                </div>
+                <!-- <ul class="dropdown-menu">
                     <li><a class="dropdown-item" (click)="logout()">Đăng xuất</a></li>
-                </ul>
-            </li>
+                </ul> -->
+                <div class="nav-link dropdown-toggle d-flex align-items-center" id="navbarDropdownMenuLink"
+                    role="button" data-bs-toggle="dropdown">
+                   <i class="fa fa-power-off" style="font-size: 34px;" aria-hidden="true" 
+                        height="34"><a class="dropdown-item" (click)="logout()"></a></i>
+                </div>
+
+     
+      
+
+
         </ul>
 
     </div>
@@ -151,7 +155,7 @@
         </div>
 
         <div class="footer-bottom">
-             Hệ thống đăng ký học | All rights reserved.
+            Hệ thống đăng ký học | All rights reserved.
         </div>
     </div>
 </footer>
