@@ -255,7 +255,10 @@ export class RegisterSubjectComponent implements OnInit {
       .registerSubject(this.addEmployeeForm)
       .subscribe((data) => {
         this.subjectList = data;
-        console.log(this.subjectList);
+        if(data.status=='Thành công')
+       alert('Đăng ký môn học thành công!');
+      else
+         alert(data.message);
       });
     this.subjectService.getAllRegisterSubjectByUser('register').subscribe((data) => {
       this.events = data;

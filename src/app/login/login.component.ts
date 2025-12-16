@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   formLoginEntity: FormLogin = new FormLogin();
   username: String = '';
+  message: String = 'Tài khoản hoặc mật khẩu không chính xác.';
+  status: String = 'success';
   @ViewChild('formLoginEntitys')
   formLogin!: NgForm;
   constructor(private router: Router, private loginService: LoginService) {}
@@ -20,15 +22,21 @@ export class LoginComponent implements OnInit {
     console.log(this.formLoginEntity);
     this.loginService.login(this.formLoginEntity).subscribe({
       next: (res) => {
-        localStorage.setItem('token', res.token);
-        localStorage.setItem('role', res.role);
-        localStorage.setItem("username",  res.username);
-        // this.username = res.username;
-        if (res.role === 'teacher') {
-          this.router.navigate(['/teacher/home']);
+        if (res.status == 'success') {
+          localStorage.setItem('token', res.token);
+          localStorage.setItem('role', res.role);
+          localStorage.setItem('username', res.username);
+          localStorage.setItem('status', res.status);
+          // this.username = res.username;
+          if (res.role === 'teacher') {
+            this.router.navigate(['/teacher/home']);
+          } else {
+            console.log(localStorage.getItem('role'));
+            this.router.navigate(['/student/register-subject']);
+          }
         } else {
-          console.log(localStorage.getItem('role'));
-          this.router.navigate(['/student/register-subject']);
+          this.status=res.status
+          localStorage.setItem('status', res.status);
         }
       },
       error: (err) => {

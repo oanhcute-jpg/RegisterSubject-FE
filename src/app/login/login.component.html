@@ -14,7 +14,7 @@
                                 </div>
 
                                 <!-- <form> -->
-                                      <form #formLogin="ngForm">
+                                <form #formLogin="ngForm">
                                     <!-- <p>Trình trung bình yếu</p> -->
                                     <div data-mdb-input-init class="form-outline mb-4">
                                         <label class="form-label" for="form2Example11">Tên đăng nhập</label>
@@ -28,13 +28,15 @@
                                         <label class="form-label" for="form2Example22">Mật khẩu</label>
                                         <input [(ngModel)]="formLoginEntity.password" name="password" type="password"
                                             id="form2Example22" class="form-control" />
-
+                                    </div>
+                                    <div *ngIf="status=='error'" class="text-danger">
+                                        Tài khoản hoặc mật khẩu không chính xác.
                                     </div>
 
                                     <div class="text-center pt-1 mb-5 pb-1">
                                         <button data-mdb-button-init data-mdb-ripple-init
-                                            class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
-                                            type="button" (click)="onSubmit()" >Đăng nhập</button>
+                                            class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button"
+                                            (click)="onSubmit()">Đăng nhập</button>
                                         <!-- <a class="text-muted" href="#!">Forgot password?</a> -->
                                     </div>
 
