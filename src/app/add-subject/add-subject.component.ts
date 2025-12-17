@@ -7,6 +7,7 @@ import { SubjectServiceService } from '../service/subject-service.service';
 import { NgForm } from '@angular/forms';
 import * as bootstrap from 'bootstrap';
 import { an, dA } from '@fullcalendar/core/internal-common';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-subject',
@@ -203,13 +204,40 @@ export class AddSubjectComponent implements OnInit {
     });
     window.location.reload();
   }
-  deleteById(id: any) {
-    this.subjectService.deleteSubject(id).subscribe(() => {
-      this.getAllSubject();
-    });
+  // deleteById(id: any) {
+  //     if (confirm(`Bạn có chắc chắn muốn xoá môn học này không ?`)) {
+  //   this.subjectService.deleteSubject(id).subscribe(() => {
+  //     this.getAllSubject();
+  //   });
+  // }
+  //   window.location.reload();
+  // }
+deleteById(id: any) {
+  Swal.fire({
+    title: 'Xác nhận xoá',
+    text: 'Bạn có chắc chắn muốn xoá môn học này không?',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Xoá',
+    cancelButtonText: 'Huỷ',
+  }).then((result) => {
+    if (result.isConfirmed) {
+ this.subjectService.deleteSubject(id).subscribe({
+  next: () => {
+    console.log('DELETE NEXT');
     window.location.reload();
+  },
+  error: (err) => {
+    this.getAllSubject()
+    console.error('DELETE ERROR', err);
+  },
+  complete: () => {
+    console.log('DELETE COMPLETE');
   }
-  setupPagination() {
+});
+    }
+  });
+}  setupPagination() {
     // this.totalPages = Math.ceil(this.items.length / this.pageSize);
     // console.log(this.totalPages)
     this.totalPagesArr = Array(this.totalPages)

@@ -28,7 +28,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Đăng kí tín chỉ</h5>
+                    <h5 class="modal-title" style="font-size: 20px" id="exampleModalLabel">Đăng kí tín chỉ</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -37,7 +37,7 @@
                             <div class="col-12 mb-3 mb-lg-5">
                                 <div class="position-relative card table-nowrap table-card">
                                     <div class="card-header align-items-center">
-                                        <h5 class="mb-0">Danh sách môn học</h5>
+                                        <h5 class="mb-0" style="font-size: 20px;">Danh sách môn học</h5>
                                         <!-- <p class="mb-0 small text-muted">1 Pending</p> -->
                                     </div>
                                     <div class="table-responsive">
@@ -48,6 +48,8 @@
                                                     <th>Tên môn học</th>
                                                     <th>Số tín chỉ</th>
                                                     <th>Tiết</th>
+                                                     <th>Giáo viên</th>
+                                                     <th>Phòng học</th>
                                                     <th>Số sinh viên</th>
                                                 </tr>
                                             </thead>
@@ -58,13 +60,16 @@
                                                     </td>
                                                     <td> {{ subject.name }}</td>
                                                     <td> {{ subject.credits }}</td>
+                                                    <td><span> {{ subject.lessonStart }}->{{ subject.lessonEnd}}</span></td>
+                                                     <td>{{ subject.teacherName }}</td>
+                                                      <td>{{ subject.roomName }}</td>
                                                     <td>
-                                                        <span> {{ subject.lessonStart }}->{{ subject.lessonEnd}}</span>
-                                                    <td>
-                                                        {{ subject.studentNumberMax }}
+                                                      {{ subject.studentNumberNow }}/{{ subject.studentNumberMax }}
                                                     </td>
-                                                         <td>
-                                                       <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="registerSubject(subject.id)" >Đăng kí</button>
+                                                    <td>
+                                                        <button type="button" class="btn btn-success"
+                                                            data-bs-dismiss="modal"
+                                                            (click)="registerSubject(subject.id)">Đăng kí</button>
                                                     </td>
                                                 </tr>
                                                 <!-- <tr class="align-middle">
@@ -155,4 +160,3 @@
             </div>
         </div>
     </div>
-    

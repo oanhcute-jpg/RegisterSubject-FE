@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponentComponent } from '../confirm-dialog-component/confirm-dialog-component.component';
 import { employeeForm } from '../add-employee/add-employee.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register-subject',
@@ -141,19 +142,46 @@ export class RegisterSubjectComponent implements OnInit {
     const start = event.start?.toLocaleString();
     const end = event.end?.toLocaleString();
 
-    // Hiển thị popup, hoặc log ra console
-    if (confirm(`Bạn có muốn huỷ đăng kí môn học này ?`)) {
-      console.log('oke');
-      this.deleteRegisterSubject.id = Number(idSubject);
+      Swal.fire({
+        title: 'Xác nhận huỷ',
+        text: 'Bạn có chắc chắn muốn huỷ đăng kí môn học này không?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Xoá',
+        cancelButtonText: 'Huỷ',
+      }).then((result) => {
+        if (result.isConfirmed) {
+       this.deleteRegisterSubject.id = Number(idSubject);
       this.subjectService
         .deleteRegisterSubject(this.deleteRegisterSubject)
-        .subscribe((data) => {
-          return data;
-        });
-      window.location.reload();
+        .subscribe({
+      next: () => {
+        console.log('DELETE NEXT');
+        window.location.reload();
+      },
+      error: (err) => {
+          window.location.reload();
+        console.error('DELETE ERROR', err);
+      },
+      complete: () => {
+        console.log('DELETE COMPLETE');
+      }
+    });
+        }
+      });
+    // Hiển thị popup, hoặc log ra console
+    // if (confirm(`Bạn có muốn huỷ đăng kí môn học này ?`)) {
+    //   console.log('oke');
+    //   this.deleteRegisterSubject.id = Number(idSubject);
+    //   this.subjectService
+    //     .deleteRegisterSubject(this.deleteRegisterSubject)
+    //     .subscribe((data) => {
+    //       return data;
+    //     });
+    //   window.location.reload();
 
-      // event.remove(); // xoá luôn event nếu người dùng xác nhận
-    }
+    //   // event.remove(); // xoá luôn event nếu người dùng xác nhận
+    // }
     console.log('oke');
   }
 
