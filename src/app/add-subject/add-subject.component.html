@@ -168,7 +168,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" style="font-size: 24px; font-weight: bold;">Nhập thông tin môn học</h5>
+        <h5 class="modal-title" style="font-size: 24px; font-weight: bold;"> {{ mode === 'add' ? 'Nhập thông tin môn học' : 'Chỉnh sửa thông tin môn học' }}</h5>
         <button (click)="closeModal()" type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">×</span>
         </button>
